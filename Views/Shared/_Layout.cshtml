@@ -1,0 +1,27 @@
+﻿@using System.Web.Optimization; 
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@{ Html.RenderAction("Title", "Head"); }</title>
+    @Styles.Render("~/styles/bundled")
+
+</head>
+<body>
+    @Html.RenderEPiServerQuickNavigator()
+    <div class="quicksilver site-wrapper">
+
+    </div>
+
+    @{ Html.RenderAction("Index", "Navigation"); }
+    <div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
+</body>
+</html>

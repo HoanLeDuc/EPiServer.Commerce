@@ -1,0 +1,16 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html 
+@model EPiServer.Commerce.Models.Blocks.SliderBlock
+
+<div>
+    <ul class="bxslider">
+  @foreach (var img in Model.Images)  {
+      
+   <li>
+      <img src="@img.Href" />
+       @EPiServer.Web.Routing.UrlResolver.Current.Route(new EPiServer.UrlBuilder(img.Href))
+       
+   </li>   
+  }
+        </ul>
+</div>

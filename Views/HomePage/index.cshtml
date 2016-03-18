@@ -1,0 +1,8 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Commerce.Models.ViewModels.IPageViewModel<EPiServer.Commerce.Models.Pages.HomePage>
+
+<div id="frontpage">
+  @Html.PropertyFor(x=>x.CurrentPage.MainContent)
+</div>

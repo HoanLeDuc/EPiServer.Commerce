@@ -1,0 +1,22 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Commerce.Models.ViewModels.CarouselViewModel 
+
+@System.Web.Optimization.Styles.Render("~/bundles/bxslidercss")
+@System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+@System.Web.Optimization.Scripts.Render("~/bundles/bxsliderjs")
+<script language="javascript">
+    $(document).ready(function () {
+        $("#carouselSlider").bxSlider(); 
+    });
+</script>
+<div id="carouselSlider">
+  @if (Model != null)
+  {
+      foreach (var item in Model.Items)
+      {
+          @Html.Partial("CarouselItemBlock", item)
+      }
+  }
+</div>

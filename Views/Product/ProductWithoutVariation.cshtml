@@ -1,0 +1,33 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Commerce.Models.ViewModels.FashionProductViewModel
+
+<h2>Product partial view</h2>
+<div class="row">
+    <div class="product-details jsProductDetails">
+        <div class="col-xs-12 col-md-6 product-details__media">
+            <img src="@Model.Images.First()" />
+        </div>
+    </div>
+    <div class="col-md-6 product-info">
+         <div class="row">
+             <div class="col-xs-12 col-md-8">
+                 <h3>@Html.DisplayFor(x => x.Product.DisplayName)</h3>
+                 <div class="col-xs-12 col-md-4 pull-right"></div>
+             </div>
+         </div>
+        <p>
+            @Html.PropertyFor(x => x.Product.Description)
+        </p>
+        <p>
+            <strong>Code:</strong>@Html.DisplayFor(x => x.Product.Code)
+        </p>
+        <ul class="block-list">
+            <li>@Html.PropertyFor(x=>x.Product.Brand)</li>
+            <li>@Html.PropertyFor(x=>x.Product.MainBody)</li>
+        </ul>
+    </div>
+  Product Information 
+    @Html.PropertyFor(x=> x.Product.DisplayName)
+</div>
