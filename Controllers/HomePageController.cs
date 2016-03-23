@@ -12,14 +12,23 @@ namespace EPiServer.Commerce.Controllers
 {
     public class HomePageController : PageBaseController<HomePage>
     {
-        public ActionResult Index(HomePage currentPage)
+        private readonly IContentLoader _contentLoader;
+
+        public HomePageController(IContentLoader contentLoader)
         {
+            _contentLoader = contentLoader; 
+        }
+
+        public ActionResult Index(PageData currentPage)
+        {
+            var virtualPath = string.Format("~/Views/{0}/Index.cshtml", currentPage.GetOriginalType().Name);
+            if (!System.IO.File.Exists(Request.MapPath(virtualPath))) virtualPath = "Index"; 
             /* Implementation of action. You can create your own view model class that you pass to the view or
              * you can pass the page type for simpler templates */
 
-            var pageViewModel = new PageViewModel<HomePage>(currentPage); 
+            var pageViewModel = CreatePageViewModel(currentPage); 
 
-            return View(pageViewModel);
+            return View(virtualPath, pageViewModel);
         }
     }
 }

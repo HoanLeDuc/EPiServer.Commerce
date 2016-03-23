@@ -1,0 +1,93 @@
+﻿@model EPiServer.Commerce.Models.ViewModels.IPageViewModel<HomePage>
+
+<nav class="navbar navbar-default navbar-static-top navbar-main" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header logo">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainmenu-top">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="@Model.LogoImage" class="img-responsive" alt="Logo" @Html.EditAttributes("LogoImage")></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="mainmenu-top">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        @*@Html.ContentLink(@CustomerContext.Current.CurrentContact.FullName, Model.AccountPage ?? ContentReference.StartPage)*@
+                    }
+                    else
+                    {
+                        @Html.ContentLink(Model.LoginPage)
+                    }
+                </li>
+                @if (Model.TopLeftMenu != null)
+                {
+                    @Html.Partial("_TopMenu", Model.TopLeftMenu)
+                }
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                @*@Html.Partial("_TopMenu", Model.TopRightMenu, new ViewDataDictionary() { { "ShowCountsOnLinks", true } })*@
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="#" />&nbsp;[Lang] <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        @*@foreach (var langInfo in Model.Languages)
+                        {
+                            if (langInfo.Selected == false)
+                            {
+                                if (isInEditMode == false)
+                                {
+                                    <li><a href="/@langInfo.Url"><img src="@langInfo.IconUrl" />&nbsp;@langInfo.DisplayName</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@langInfo.EditUrl" target="_top"><img src="@langInfo.IconUrl" />&nbsp;@langInfo.DisplayName</a></li>
+                                }
+                            }
+                        }*@
+                    </ul>
+                </li>
+            </ul>
+
+
+
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<nav class="navbar navbar-default menu-main navbar-sub" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainmenu-sub">
+                <span class="sr-only">@Html.Translate("/common/layout/open_menu")</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse" id="mainmenu-sub">
+            @Html.Partial("_MainMenu")
+            <div class="navbar-form navbar-right search">
+                <form action="@Url.ContentUrl(Model.SearchPage)">
+                    <div class="form-group" ng-controller="AutoCompleteController">
+                        <label class="sr-only" for="SearchText">@Html.Translate("/common/layout/search_label")</label>
+                        <span data-valmsg-replace="true" data-valmsg-for="SearchText" class="field-validation-valid"></span>
+                        @*Todo: Fix language*@
+                        <input id="SearchText" type="text" class="form-control" placeholder="@Html.Translate("/common/layout/search_placeholder")" name="q" data-val-required="@string.Format(Html.Translate("/common/validation/required"), Html.Translate("/common/layout/search_label"))" required="required" data-val="true" ng-init="init('no')" auto-complete />
+                        <input type="submit" value="@Html.Translate("/common/layout/search_button")" role="button" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+

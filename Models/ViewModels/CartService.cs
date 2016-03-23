@@ -18,6 +18,8 @@ using EPiServer.Commerce.Models.Catalog;
 using Mediachase.Commerce;
 using Mediachase.Commerce.Orders.Managers;
 using Mediachase.Commerce.Catalog.Managers;
+using EPiServer.Events.Clients;
+using Mediachase.Commerce.Engine.Events;
 
 namespace EPiServer.Commerce.Models.ViewModels
 {
@@ -64,6 +66,8 @@ namespace EPiServer.Commerce.Models.ViewModels
 
             // Get variations from line items 
             var variants = _contentLoader.GetItems(lineItems.Select(item => _referenceConverter.GetContentLink(item.Code)), CultureInfo.InvariantCulture).OfType<VariationContent>();
+
+            _referenceConverter.GetContentLink(lineItems.FirstOrDefault().Code); 
 
             List<CartItem> cartItems = new List<CartItem>();
             foreach (var lineItem in lineItems)
